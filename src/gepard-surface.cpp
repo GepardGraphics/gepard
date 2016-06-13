@@ -24,52 +24,15 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GEPARD_SURFACE_H
-#define GEPARD_SURFACE_H
-
-#include "gepard-defs.h"
+#include "gepard-surface.h"
 
 namespace gepard {
 
-class Gepard;
-
-/*!
- * \brief The basic Surface class for _Gepard_
- *
- * \todo: documentation is missing.
- */
-class Surface {
-public:
-    Surface(Gepard* gepard = nullptr, uint32_t width = 0, uint32_t height = 0);
-    Surface(uint32_t width = 0, uint32_t height = 0)
-        : _gepard(nullptr)
-        , _width(width)
-        , _height(height)
-    {
-    }
-
-    virtual void* getDisplay() = 0;
-    virtual unsigned long getWindow() = 0;
-
-    const Gepard* gepard() const { return _gepard; }
-    const uint32_t width() const { return _width; }
-    const uint32_t height() const { return _height; }
-
-    // \deprecated: use 'static connect(Surface, Gepard)'
-    void setGepard(Gepard* gepard)
-    {
-        if (!this->_gepard) {
-            _gepard = gepard;
-        }
-    }
-
-protected:
-    Gepard* _gepard;
-
-    uint32_t _width;
-    uint32_t _height;
-};
+Surface::Surface(Gepard* gepard, uint32_t width, uint32_t height)
+    : _gepard(gepard)
+    , _width(width)
+    , _height(height)
+{
+}
 
 } //  namespace gepard
-
-#endif // GEPARD_SURFACE_H

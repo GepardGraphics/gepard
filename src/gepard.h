@@ -29,14 +29,14 @@
 
 namespace gepard {
 
+class GepardEngine;
 class Image;
 class Surface;
 
 class Gepard {
 public:
-    explicit Gepard(Surface* surface)
-        : _surface(surface)
-    {}
+    explicit Gepard(Surface* surface);
+    ~Gepard();
 
     /**
      * 2. State (W3-2DContext-2015)
@@ -224,7 +224,7 @@ public:
         double dirtyWidth, double dirtyHeight);
 
 private:
-    Surface* _surface;
+    GepardEngine* _engine;
 };
 
 } // namespace gepard

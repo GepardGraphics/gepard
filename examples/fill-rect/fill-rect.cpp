@@ -1,6 +1,6 @@
 /* Copyright (C) 2015-2016, Gepard Graphics
- * Copyright (C) 2016, Kristof Kosztyo <kkristof@inf.u-szeged.hu>
- * Copyright (C) 2016, Szilard Ledan <szledan@gmail.com>
+ * Copyright (C) 2015-2016, Szilard Ledan <szledan@gmail.com>
+ * Copyright (C) 2015, Kristof Kosztyo <kkristof@inf.u-szeged.hu>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,52 +24,27 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GEPARD_SURFACE_H
-#define GEPARD_SURFACE_H
+#include "gepard.h"
+#include "gepard-xsurface.h"
+#include <iostream>
 
-#include "gepard-defs.h"
+int main()
+{
+    // Draw on XWindow
+    gepard::XSurface s(500, 500);
+    gepard::Gepard g(&s);
 
-namespace gepard {
+    g.fillRect(100, 100, 400, 300);
 
-class Gepard;
+    char a;
+    std::cin >> a;
 
-/*!
- * \brief The basic Surface class for _Gepard_
- *
- * \todo: documentation is missing.
- */
-class Surface {
-public:
-    Surface(Gepard* gepard = nullptr, uint32_t width = 0, uint32_t height = 0);
-    Surface(uint32_t width = 0, uint32_t height = 0)
-        : _gepard(nullptr)
-        , _width(width)
-        , _height(height)
-    {
-    }
+//    // Draw to a png
+//    gepard::PNGSurface s2(500, 500, buffer);
+//    gepard::Gepard g2;
 
-    virtual void* getDisplay() = 0;
-    virtual unsigned long getWindow() = 0;
+//    g2.fillRect(100, 100, 400, 300);
+//    s2.save("result.png");
 
-    const Gepard* gepard() const { return _gepard; }
-    const uint32_t width() const { return _width; }
-    const uint32_t height() const { return _height; }
-
-    // \deprecated: use 'static connect(Surface, Gepard)'
-    void setGepard(Gepard* gepard)
-    {
-        if (!this->_gepard) {
-            _gepard = gepard;
-        }
-    }
-
-protected:
-    Gepard* _gepard;
-
-    uint32_t _width;
-    uint32_t _height;
-};
-
-} //  namespace gepard
-
-#endif // GEPARD_SURFACE_H
+    return 0;
+}

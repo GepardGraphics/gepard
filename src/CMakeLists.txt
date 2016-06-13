@@ -12,4 +12,4 @@ endforeach()
 list(REMOVE_DUPLICATES dir_list)
 include_directories(${dir_list})
 
-file(COPY gepard.h DESTINATION ${INCLUDE_OUTPUT_DIR})
+file(COPY gepard.h gepard-xsurface.h gepard-surface.h DESTINATION ${INCLUDE_OUTPUT_DIR})

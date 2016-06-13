@@ -1,4 +1,4 @@
-/* Copyright (C) 2015-2016, Gepard Graphics
+/* Copyright (C) 2016, Gepard Graphics
  * Copyright (C) 2016, Kristof Kosztyo <kkristof@inf.u-szeged.hu>
  * Copyright (C) 2016, Szilard Ledan <szledan@gmail.com>
  * All rights reserved.
@@ -24,52 +24,56 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GEPARD_SURFACE_H
-#define GEPARD_SURFACE_H
+#ifndef GEPARD_XSURFACE_H
+#define GEPARD_XSURFACE_H
 
 #include "gepard-defs.h"
+#include "gepard-surface.h"
+#include <X11/Xatom.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
 
 namespace gepard {
 
-class Gepard;
-
 /*!
- * \brief The basic Surface class for _Gepard_
+ * \brief A simple XSurface class for _Gepard_
  *
  * \todo: documentation is missing.
  */
-class Surface {
+class XSurface : public Surface {
 public:
-    Surface(Gepard* gepard = nullptr, uint32_t width = 0, uint32_t height = 0);
-    Surface(uint32_t width = 0, uint32_t height = 0)
-        : _gepard(nullptr)
-        , _width(width)
-        , _height(height)
+    XSurface(uint32_t width = 0, uint32_t height = 0)
+        : Surface(width, height)
     {
-    }
+        XSetWindowAttributes windowAttributes;
+        XWMHints hints;
+        Window root = 0;
 
-    virtual void* getDisplay() = 0;
-    virtual unsigned long getWindow() = 0;
-
-    const Gepard* gepard() const { return _gepard; }
-    const uint32_t width() const { return _width; }
-    const uint32_t height() const { return _height; }
-
-    // \deprecated: use 'static connect(Surface, Gepard)'
-    void setGepard(Gepard* gepard)
-    {
-        if (!this->_gepard) {
-            _gepard = gepard;
+        _display = XOpenDisplay(NULL);
+        if(_display == NULL) {
+            //! \todo: LOG: "XOpenDisplay returned NULL");
         }
+        root = XDefaultRootWindow(_display);
+        windowAttributes.event_mask = ExposureMask | PointerMotionMask | KeyPressMask;
+        _window = XCreateWindow ( // create a window with the provided parameters
+            _display, root, 0, 0, width, height, 0,
+            CopyFromParent, InputOutput, CopyFromParent, CWEventMask, &windowAttributes);
+        hints.input = True;
+        hints.flags = InputHint;
+        XSetWMHints(_display, _window, &hints);
+
+        XMapWindow(_display, _window); // make the window visible on the screen
+        XStoreName(_display, _window, "XSurface for gepard"); //! \todo: set title.
     }
 
-protected:
-    Gepard* _gepard;
+    virtual void* getDisplay() { return (void*)_display; }
+    virtual unsigned long getWindow() { return _window; }
 
-    uint32_t _width;
-    uint32_t _height;
+private:
+    Display* _display;
+    Window _window;
 };
 
 } //  namespace gepard
 
-#endif // GEPARD_SURFACE_H
+#endif // GEPARD_XSURFACE_H

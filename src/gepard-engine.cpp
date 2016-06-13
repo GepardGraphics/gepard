@@ -1,6 +1,5 @@
-/* Copyright (C) 2015-2016, Gepard Graphics
- * Copyright (C) 2015, Szilard Ledan <szledan@gmail.com>
- * Copyright (C) 2015, Kristof Kosztyo <kkristof@inf.u-szeged.hu>
+/* Copyright (C) 2016, Gepard Graphics
+ * Copyright (C) 2016, Szilard Ledan <szledan@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,10 +23,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "gepard.h"
+#include "gepard-engine.h"
 
-int main()
-{
-    /* example code */
-    return 0;
-}
+namespace gepard {
+
+} // namespace gepard

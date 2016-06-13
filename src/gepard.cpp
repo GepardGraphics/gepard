@@ -27,10 +27,23 @@
 #include "gepard.h"
 
 #include "gepard-defs.h"
+#include "gepard-engine.h"
 #include "gepard-image.h"
 #include "gepard-surface.h"
 
 namespace gepard {
+
+Gepard::Gepard(Surface* surface)
+    : _engine(new GepardEngine(surface))
+{
+}
+
+Gepard::~Gepard()
+{
+    if (_engine) {
+        delete _engine;
+    }
+}
 
 void Gepard::save()
 {
@@ -295,7 +308,7 @@ void Gepard::clearRect(float x, float y, float w, float h)
 
 void Gepard::fillRect(float x, float y, float w, float h)
 {
-/** @todo unimplemented function */
+    _engine->fillRect(x, y, w, h);
 }
 
 void Gepard::strokeRect(float x, float y, float w, float h)

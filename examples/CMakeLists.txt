@@ -5,7 +5,5 @@ function(build_example directory)
 endfunction(build_example)
 
 include_directories(${CMAKE_BINARY_DIR}/include/)
-# TODO: remove:
-include_directories(${CMAKE_SOURCE_DIR}/src/)
 
-#build_example("triangle" "")
+build_example("fill-rect" "")

@@ -30,22 +30,24 @@
 
 #include "gepard-defs.h"
 
+#include "gepard-engine.h"
 #include "gepard-image.h"
 #include "gepard-surface.h"
 #include "gepard-types.h"
+#include <EGL/egl.h>
 
 namespace gepard {
 
 class Image;
 class Surface;
 
+namespace gles2 {
+
 class GepardGLES2 {
 public:
-    explicit GepardGLES2(Surface* surface)
-        : _surface(surface)
-    {}
+    explicit GepardGLES2(Surface* surface);
 
-    /* 5. Building paths (W3-2DContext-2015) */
+    /* 5. Building paths */
     void closePath();
     void moveTo(Float x, Float y);
     void lineTo(Float x, Float y);
@@ -55,7 +57,7 @@ public:
     void rect(Float x, Float y, Float w, Float h);
     void arc(Float x, Float y, Float radius, Float startAngle, Float endAngle, bool counterclockwise = false);
 
-    /* 11. Drawing paths to the canvas (W3-2DContext-2015) */
+    /* 11. Drawing paths to the canvas */
     void beginPath();
     void fill();
     void stroke();
@@ -63,9 +65,17 @@ public:
     void clip();
     bool isPointInPath(Float x, Float y);
 
+    void fillRect(float x, float y, float w, float h);
+
 private:
     Surface* _surface;
+
+    EGLDisplay _eglDisplay;
+    EGLSurface _eglSurface;
+    EGLContext _eglContext;
 };
+
+} // namespace gles2
 
 } // namespace gepard
 
