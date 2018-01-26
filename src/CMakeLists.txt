@@ -5,6 +5,7 @@ set(COMMON_SOURCES
     gepard-engine.cpp
     utils/gepard-types.cpp
     utils/gepard-defs.cpp
+    utils/minitrace.c
 )
 
 set(GLES2_SOURCES

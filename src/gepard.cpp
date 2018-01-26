@@ -30,13 +30,19 @@
 #include "gepard-engine.h"
 #include "gepard-image.h"
 #include "gepard-types.h"
+#include "minitrace.h"
 #include <map>
 
 namespace gepard {
 
 Gepard::Gepard(Surface* surface)
-    : _engine(new GepardEngine(surface))
 {
+#if defined(GD_ENABLE_MINITRACE)
+    const char* minitraceFile = std::getenv("GD_MINITRACE_FILE");
+    mtr_init(minitraceFile ? minitraceFile : "gepard.json");
+#endif // GD_ENABLE_MINITRACE
+
+    _engine = new GepardEngine(surface);
 }
 
 Gepard::~Gepard()
@@ -44,6 +50,7 @@ Gepard::~Gepard()
     if (_engine) {
         delete _engine;
     }
+    mtr_shutdown();
 }
 
 void Gepard::save()
@@ -313,6 +320,7 @@ void Gepard::clearRect(float x, float y, float w, float h)
  */
 void Gepard::fillRect(float x, float y, float w, float h)
 {
+    MTR_SCOPE("Gepard", "fillRect");
     GD_ASSERT(_engine);
     _engine->fillRect(x, y, w, h);
 }

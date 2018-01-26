@@ -51,6 +51,9 @@ def create_options(arguments=None):
     if hasattr(arguments, 'no_colored_logs') and arguments.no_colored_logs:
         opts.append('-DDISABLE_LOG_COLORS=ON')
 
+    if hasattr(arguments, 'minitrace'):
+        opts.append('-DENABLE_MINITRACE=ON')
+
     return opts
 
 
@@ -67,6 +70,7 @@ def add_extra_build_args(parser):
     parser.add_argument('--target', action='store', choices=['x86-linux', 'arm-linux'], help='Specify build target. Leave empty for native build.')
     parser.add_argument('--log-level', action='store', type=int, choices=range(0,5), default=0, help='Set logging level.')
     parser.add_argument('--no-colored-logs', action='store_true', default=False, help='Disable colored log messages.')
+    parser.add_argument('--minitrace', action='store_true', default=False, help='Enable tracing.')
 
 
 def get_args(skip_unknown=False):
