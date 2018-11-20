@@ -142,6 +142,10 @@ ZygoteMark::ZygoteMark(ConfigMap &configMap)
 {
 }
 
+ZygoteMark::~ZygoteMark()
+{
+}
+
 void ZygoteMark::step()
 {
     steps++;

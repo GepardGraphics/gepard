@@ -49,6 +49,16 @@ MonkeyMark::MonkeyMark(ConfigMap& configMap)
 {
 }
 
+MonkeyMark::~MonkeyMark()
+{
+    if (surface) {
+        delete surface;
+    }
+    if (gepard) {
+        delete gepard;
+    }
+}
+
 Savanna::React MonkeyMark::init(gepard::XSurface* srfc)
 {
     std::srand(configs["seed"]);

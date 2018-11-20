@@ -38,6 +38,7 @@ namespace savanna {
 class MonkeyMark : public ZygoteMark {
 public:
     explicit MonkeyMark(ConfigMap& configMap);
+    virtual ~MonkeyMark();
 
     virtual Savanna::React init(gepard::XSurface*);
     virtual Savanna::React start();

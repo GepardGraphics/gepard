@@ -192,7 +192,7 @@ int main(int argc, char* argv[])
     }
 
     struct {
-        const bool isOn;
+        const int isOn;
         const std::string file;
     } a_png = {
         CHECK_FLAG("-p, --png"),

@@ -103,6 +103,7 @@ private:
 class ZygoteMark {
 public:
     explicit ZygoteMark(ConfigMap& configMap);
+    virtual ~ZygoteMark();
 
     virtual Savanna::React init(gepard::XSurface*) = 0;
     virtual Savanna::React start() = 0;

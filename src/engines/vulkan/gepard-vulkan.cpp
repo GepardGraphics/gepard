@@ -237,7 +237,7 @@ void GepardVulkan::fillRect(const Float x, const Float y, const Float w, const F
 
     _vk.vkBeginCommandBuffer(commandBuffer, &commandBufferBeginInfo);
 
-    const VkClearValue clearValue = { 0.0, 0.0, 0.0, 0.0 };
+    const VkClearValue clearValue = { { { 0.0 , 0.0, 0.0, 0.0 } } };
 
     const VkRenderPassBeginInfo renderPassInfo = {
         VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,   // VkStructureType        sType;
@@ -587,7 +587,7 @@ void GepardVulkan::drawImage(Image& imagedata, Float sx, Float sy, Float sw, Flo
 
     _vk.vkBeginCommandBuffer(commandBuffer, &commandBufferBeginInfo);
 
-    const VkClearValue clearValue = { 0.0, 0.0, 0.0, 0.0 };
+    const VkClearValue clearValue = { { { 0.0 , 0.0, 0.0, 0.0 } } };
 
     const VkRenderPassBeginInfo renderPassInfo = {
         VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,   // VkStructureType        sType;
@@ -1118,9 +1118,7 @@ void GepardVulkan::createSurfaceImage()
        nullptr,                                     // const VkCommandBufferInheritanceInfo*    pInheritanceInfo;
     };
 
-    const VkClearColorValue clearColor = {
-        0.0, 0.0, 0.0, 0.0
-    };
+    const VkClearColorValue clearColor = { { 0.0 , 0.0, 0.0, 0.0 } };
 
     const VkImageSubresourceRange range = {
         VK_IMAGE_ASPECT_COLOR_BIT,  // VkImageAspectFlags    aspectMask;
