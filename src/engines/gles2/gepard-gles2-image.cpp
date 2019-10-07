@@ -175,10 +175,10 @@ void GepardGLES2::drawImage(const Image& imageData, const FloatPoint srcXY, cons
 
     {
         const GLfloat textureCoords[] = {
-            (GLfloat)destTL.x, (GLfloat)destTL.y, (GLfloat)(srcXY.x / Float(imgWidth)), (GLfloat)(srcXY.x / Float(imgHeight)),
-            (GLfloat)destTR.x, (GLfloat)destTR.y, (GLfloat)((srcXY.x + srcWH.x) / Float(imgWidth)), (GLfloat)(srcXY.x / Float(imgHeight)),
-            (GLfloat)destBL.x, (GLfloat)destBL.y, (GLfloat)(srcXY.x / Float(imgWidth)), (GLfloat)((srcXY.x + srcWH.y) / Float(imgHeight)),
-            (GLfloat)destBR.x, (GLfloat)destBR.y, (GLfloat)((srcXY.x + srcWH.x) / Float(imgWidth)), (GLfloat)((srcXY.x + srcWH.y) / Float(imgHeight)),
+            (GLfloat)destTL.x, (GLfloat)destTL.y, (GLfloat)(srcXY.x / Float(imgWidth)), (GLfloat)(srcXY.y / Float(imgHeight)),
+            (GLfloat)destTR.x, (GLfloat)destTR.y, (GLfloat)((srcXY.x + srcWH.x) / Float(imgWidth)), (GLfloat)(srcXY.y / Float(imgHeight)),
+            (GLfloat)destBL.x, (GLfloat)destBL.y, (GLfloat)(srcXY.x / Float(imgWidth)), (GLfloat)((srcXY.y + srcWH.y) / Float(imgHeight)),
+            (GLfloat)destBR.x, (GLfloat)destBR.y, (GLfloat)((srcXY.x + srcWH.x) / Float(imgWidth)), (GLfloat)((srcXY.y + srcWH.y) / Float(imgHeight)),
         };
 
         const GLint index = glGetAttribLocation(textureProgram.id, "a_position");
