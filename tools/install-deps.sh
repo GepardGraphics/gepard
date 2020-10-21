@@ -46,7 +46,7 @@ do
   shift
 done
 
-common_list="cmake libx11-dev libpng16-dev"
+common_list="cmake libx11-dev libpng-dev"
 gles2_list="libegl1-mesa-dev libgles2-mesa-dev"
 vulkan_list=""
 
